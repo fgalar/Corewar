@@ -1,0 +1,5 @@
+create libft.a
+addlib libft.a
+addlib ft_printf/libftprintf.a
+save
+end
