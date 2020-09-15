@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:11:34 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 15:03:01 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:18:14 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,20 @@ int		invalid_syntax(char **cmd, int i, t_file *file, char *inst)
 	if (file->quotes == 1 || (!err && ((err = is_head(cmd, ".name", file->line,
 								0)) == 1 || err == 2) && !file->playername[0]))
 	{
+		fill_header(file->playername, inst, PROG_NAME_LENGTH, err);
 		file->quotes = (err == 1) ? 1 : 0;
-		ft_printf(GREEN"NAME: %s\n"E0M, inst);
+		return (0);
 	}
 	if (file->quotes == 2 || (!err && ((err = is_head(cmd, ".comment",
 							file->line, 0)) < 3 && err) && !file->comment[0]))
 	{
+		fill_header(file->comment, inst, COMMENT_LENGTH, err);
 		file->quotes = (err == 1) ? 2 : 0;
-		ft_printf(GREEN"COMMENT: %s\n"E0M, inst);
+		return (0);
 	}
 	if (is_label(cmd))
 	{
+		//create new label_node in the table which contains its instruction nodes
 		ft_printf(BLUE"LABEL: %s\n"E0M, cmd[i]);
 	}
 	return (0);
@@ -82,18 +85,20 @@ int		verify_code(t_file *file, char *line, int l, int s)
 	{
 		cmd = ft_split(line, " \t");
 		file->line = i;
-		if (cmd && cmd[0] && cmd[0][0] != '#')
+		if (cmd && cmd[0])
 		{
 			l = invalid_lexicon(cmd, i, file);
 			if (l || (s = invalid_syntax(cmd, 0, file, line)))
 			{
 				free_instruction(cmd, pitcher, line, file->fd);
-				return (0);
+				return (EXIT_FAILURE);
 			}
 		}
 		i++;
 		free_instruction(cmd, NULL, line, -1);
 	}
+	ft_printf(GREEN"NAME: "CYAN"%s\n"E0M, file->playername);
+	ft_printf(GREEN"COMMENT: "CYAN"%s\n"E0M, file->comment);
 	free_instruction(NULL, NULL, line, file->fd);
 	return (EXIT_SUCCESS);
 }

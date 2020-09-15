@@ -6,7 +6,7 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 19:19:55 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/15 14:06:45 by ciglesia         ###   ########.fr        #
+#    Updated: 2020/09/15 17:46:16 by ciglesia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -27,7 +27,7 @@ DIROP		=	./src/op/
 DIRVALID	=	./src/validation/
 
 SRC			=	asm_main.c
-LOADING		=	init_structures.c
+LOADING		=	init_structures.c load_file.c
 ANALYSIS	=	lexer.c lexer2.c parsing.c
 SYNTHESIS	=
 OP			=	op.c

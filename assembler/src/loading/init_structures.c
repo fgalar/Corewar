@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:49:08 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 14:57:08 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:13:20 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	file_init(t_file *file)
 	file->line = 0;
 	file->quotes = 0;
 	file->name = NULL;
+	file->code_tab = NULL;
 	ft_memset(file->comment, 0, COMMENT_LENGTH);
 	ft_memset(file->playername, 0, PROG_NAME_LENGTH);
 	ft_memset(file->code, 0, CHAMP_MAX_SIZE);
-	ft_memset(file->labels, 0, CHAMP_MAX_SIZE);
 }
-
+/*
 t_code	*new_instruction(void)
 {
 	t_code	*new;
@@ -38,3 +38,4 @@ t_code	*new_instruction(void)
 	new->next = NULL;
 	return (new);
 }
+*/

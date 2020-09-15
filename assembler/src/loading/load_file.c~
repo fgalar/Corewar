@@ -1,13 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_table.c                                       :+:      :+:    :+:   */
+/*   load_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/15 12:53:38 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 12:54:29 by ciglesia         ###   ########.fr       */
+/*   Created: 2020/09/15 17:45:51 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/09/15 17:58:20 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+void	fill_header(char *dest, char *inst, int size, int err)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (dest[i])
+		i++;
+	if (err == 2)
+	{
+		while (inst[j] && inst[j] != '"')
+			j++;
+		j++;
+	}
+	else
+		dest[i++] = '\n';
+	while (inst[j] && inst[j] != '"' && i < size)
+		dest[i++] = inst[j++];
+}
