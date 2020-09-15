@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:11:34 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/14 12:50:27 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/15 15:03:01 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,40 +24,48 @@ void	free_instruction(char **cmd, char *pitcher, char *line, int fd)
 		free(line);
 }
 
-int		invalid_lexicon(char **cmd, int line)
+int		invalid_lexicon(char **cmd, int line, t_file *file)
 {
 	int err;
 	int	pos;
 
 	err = 0;
 	pos = 0;
-	if ((err = is_head(cmd, ".name")) == 1)
+	if (file->quotes && (err = end_quote(cmd, file, 0)) == 1)
 		return (0);
-	if (err == 0 && (err = is_head(cmd, ".comment")) == 1)
+	if (err == 0 && ((err = is_head(cmd, ".name", line, 0)) == 1 || err == 2))
 		return (0);
-	if (err == 0 && (pos = is_label(cmd)) < 0)
-		err = pos;
-	if (err == -1)
-		ft_printf_fd(2, ERROR""RED": lexicon: invalid number of quotes: line\
- %d\n"E0M, line);
-	else if (err == -2)
-		ft_printf_fd(2, ERROR""RED": lexicon: invalid format: line %d\n"E0M,
-																		line);
+	if (err == 0 && ((err = is_head(cmd, ".comment", line, 0)) < 3 && err))
+		return (0);
+	if (err == 0)
+		pos = is_label(cmd);
 	if (err == 0 && (err = is_opcode(cmd, pos, line)) == 1)
 		return (0);
 	return ((err < 0) ? 1 : 0);
 }
 
-int		invalid_syntax(char **cmd, int i, int j, int line)
+int		invalid_syntax(char **cmd, int i, t_file *file, char *inst)
 {
-	(void)j;
-	(void)line;
-	//ft_printf(GREEN"%s\n"E0M, cmd[i]);
-	while (cmd[i])
+	int	err;
+
+	err = 0;
+	if (file->quotes)
+		end_quote(cmd, file, 0);
+	if (file->quotes == 1 || (!err && ((err = is_head(cmd, ".name", file->line,
+								0)) == 1 || err == 2) && !file->playername[0]))
 	{
-		if (cmd[i][0] == '#')
-			break ;
-		i++;
+		file->quotes = (err == 1) ? 1 : 0;
+		ft_printf(GREEN"NAME: %s\n"E0M, inst);
+	}
+	if (file->quotes == 2 || (!err && ((err = is_head(cmd, ".comment",
+							file->line, 0)) < 3 && err) && !file->comment[0]))
+	{
+		file->quotes = (err == 1) ? 2 : 0;
+		ft_printf(GREEN"COMMENT: %s\n"E0M, inst);
+	}
+	if (is_label(cmd))
+	{
+		ft_printf(BLUE"LABEL: %s\n"E0M, cmd[i]);
 	}
 	return (0);
 }
@@ -73,10 +81,11 @@ int		verify_code(t_file *file, char *line, int l, int s)
 	while (get_next_line2(file->fd, &line, &pitcher) == 1)
 	{
 		cmd = ft_split(line, " \t");
+		file->line = i;
 		if (cmd && cmd[0] && cmd[0][0] != '#')
 		{
-			l = invalid_lexicon(cmd, i);
-			if (l || (s = invalid_syntax(cmd, 0, 0, i)))
+			l = invalid_lexicon(cmd, i, file);
+			if (l || (s = invalid_syntax(cmd, 0, file, line)))
 			{
 				free_instruction(cmd, pitcher, line, file->fd);
 				return (0);

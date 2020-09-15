@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_main.c                                         :+:      :+:    :+:   */
+/*   lexer2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/05 22:21:40 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 12:34:57 by ciglesia         ###   ########.fr       */
+/*   Created: 2020/09/15 13:21:14 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/09/15 14:45:08 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		main(int ac, char **av)
+int		end_quote(char **cmd, t_file *file, int modif)
 {
-	t_file	file;
+	int i;
+	int line;
 
-	if (ac != 2)
-		return (ft_puterr(ERROR""RED": assembler needs exactly one file!"E0M,
-						EXIT_FAILURE));
-	else
-	{
-		file_init(&file);
-		if (valid_input(av[1], &file) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
+	i = 0;
+	line = file->line;
+	while (ft_itersplit(cmd, i) && *ft_itersplit(cmd, i) != '"')
+		i++;
+	if (!ft_itersplit(cmd, i))
+		return (1);
+	if (ft_itersplit(cmd, i + 1) && *ft_itersplit(cmd, i + 1) != '#')
+		return (-1 + lexicon_error(cmd, i, "invalid format or quotes", line));
+	if (modif)
+		file->quotes = 0;
+	return (1);
 }

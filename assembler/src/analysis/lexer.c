@@ -6,18 +6,16 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 23:55:20 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/14 12:55:44 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/15 13:09:40 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		is_head(char ** cmd, char *str)
+int		is_head(char ** cmd, char *str, int line, unsigned int i)
 {
 	int				quotes;
-	unsigned int	i;
 
-	i = 0;
 	while (cmd[0][i] && i < ft_strlen(str))
 	{
 		if (cmd[0][i] != str[i])
@@ -27,7 +25,7 @@ int		is_head(char ** cmd, char *str)
 	if (i != ft_strlen(str))
 		return (0);
 	if (*ft_itersplit(cmd, i++) != '"')
-		return (-1);
+		return (-1 + lexicon_error(cmd, i, "invalid number of quotes", line));
 	quotes = 1;
 	while (ft_itersplit(cmd, i))
 	{
@@ -35,10 +33,11 @@ int		is_head(char ** cmd, char *str)
 		if (quotes > 2 || (quotes >= 2 && *ft_itersplit(cmd, i) == '#'))
 			break ;
 		else if (quotes >= 2 && *ft_itersplit(cmd, i) != '"')
-			return (-2);
+			return (-2 + lexicon_error(cmd, i, "invalid format", line));
 		i++;
 	}
-	return ((quotes != 2) ? -1 : 1);
+	return ((quotes > 2 || !quotes) ? -1 +
+			lexicon_error(cmd, i, "invalid number of quotes", line) : quotes);
 }
 
 int		is_label(char **cmd)
