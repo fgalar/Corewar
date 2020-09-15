@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:11:34 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 19:53:01 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/15 21:07:19 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		capture_syntax(char **cmd, t_file *file, char *inst, int pos)
 	if ((pos = is_label(cmd)))
 		add_label(file, cmd[0]);
 	if (err == 0 && (err = is_opcode(cmd, pos, file->line)) == 1)
-		add_instruction(file, cmd, pos);
+		add_instruction(file, cmd, pos, file->line);
 	return (0);
 }
 
