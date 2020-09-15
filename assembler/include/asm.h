@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 14:56:51 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/15 15:39:11 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,20 @@ typedef struct		s_file
 	char			*labels[CHAMP_MAX_SIZE];
 }					t_file;
 
-typedef struct		s_code
+typedef struct		s_instr
 {
 	int				opcode;
 	int				acb;
 	int				reg;
 	char			*dir;
 	char			*ind;
+	struct s_instr	*next;
+}					t_instruction;
+
+typedef struct		s_code
+{
+	char			*label;
+	t_instruction	*instr;
 	struct s_code	*next;
 }					t_code;
 
