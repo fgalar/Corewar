@@ -26,7 +26,8 @@ int		main(int ac, char **av)
 			return (EXIT_FAILURE);
 		if (verify_code(&file, NULL, 0, 0) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		translate(&file, (ac == 3) ? ft_strcmp(av[1], "-v") == 0 : 0);
+		if (ac == 3 && !ft_strcmp(av[1], "-v"))
+			translate(&file, av[2]);
 		//free table, lists, char*
 	}
 	return (EXIT_SUCCESS);
