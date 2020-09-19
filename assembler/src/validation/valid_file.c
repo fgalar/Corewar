@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:21:29 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 19:28:27 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/19 02:14:01 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		valid_input(char *filename, t_file *file)
 		return (EXIT_FAILURE);
 	}
 	close(file->fd);
+	file->name = ft_strdup(filename);
 	file->fd = open(filename, O_RDONLY);
 	return (EXIT_SUCCESS);
 }
