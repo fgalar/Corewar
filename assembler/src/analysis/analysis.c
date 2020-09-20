@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:11:34 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 21:07:19 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/20 23:22:39 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,23 @@ int		invalid_line(char **cmd, int line, t_file *file)
 int		capture_syntax(char **cmd, t_file *file, char *inst, int pos)
 {
 	int	err;
+	int quotes;
 
 	err = 0;
-	if (file->quotes)
-		end_quote(cmd, file, 0);
-	if (file->quotes == 1 || (!err && ((err = is_head(cmd, ".name", file->line,
+	quotes = file->quotes;
+	(quotes) ? end_quote(cmd, file, 1) : 0;
+	if (quotes == 1 || (!err && ((err = is_head(cmd, ".name", file->line,
 								0)) == 1 || err == 2) && !file->playername[0]))
 	{
 		fill_header(file->playername, inst, PROG_NAME_LENGTH, err);
-		file->quotes = (err == 1) ? 1 : 0;
+		file->quotes = (err == 1) ? 1 : file->quotes;
 		return (0);
 	}
-	if (file->quotes == 2 || (!err && ((err = is_head(cmd, ".comment",
+	if (quotes == 2 || (!err && ((err = is_head(cmd, ".comment",
 							file->line, 0)) < 3 && err) && !file->comment[0]))
 	{
 		fill_header(file->comment, inst, COMMENT_LENGTH, err);
-		file->quotes = (err == 1) ? 2 : 0;
+		file->quotes = (err == 1) ? 2 : file->quotes;
 		return (0);
 	}
 	if ((pos = is_label(cmd)))
