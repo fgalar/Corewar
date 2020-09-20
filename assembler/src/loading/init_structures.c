@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:49:08 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 19:10:05 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/20 20:37:40 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,44 @@ t_instruction	*new_instruction(void)
 	new->ind = NULL;
 	new->next = NULL;
 	return (new);
+}
+
+void			free_instructions(t_instruction *instr)
+{
+	t_instruction *aux;
+
+	while (instr)
+	{
+		if (instr->dir)
+			free(instr->dir);
+		if (instr->ind)
+			free(instr->ind);
+		aux = instr->next;
+		free(instr);
+		instr = aux;
+	}
+}
+
+int				file_destructor(t_file *file)
+{
+	t_code	*table;
+	t_code	*tabaux;
+
+	if (file->name)
+		free(file->name);
+	if (file->code_tab)
+	{
+		table = file->code_tab;
+		while (table)
+		{
+			if (table->instr)
+				free_instructions(table->instr);
+			if (table->label)
+				free(table->label);
+			tabaux = table->next;
+			free(table);
+			table = tabaux;
+		}
+	}
+	return (0);
 }

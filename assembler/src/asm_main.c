@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:21:40 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/19 02:17:55 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/20 20:38:02 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ int		main(int ac, char **av)
 	{
 		file_init(&file);
 		if (valid_input((ac == 2) ? av[1] : av[2], &file) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+			return (EXIT_FAILURE + file_destructor(&file));
 		if (verify_code(&file, NULL, 0, 0) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+			return (EXIT_FAILURE + file_destructor(&file));
 		translate(&file, (ac == 3) ? ft_strcmp(av[1], "-v") == 0 : 0);
-		ft_printf("FILENAME: %s\n", file.name);
-		//free table, lists, char*
+		file_destructor(&file);
 	}
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/16 12:27:10 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/20 20:38:33 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int					translate(t_file *file, int verbosity);
 void				file_init(t_file *file);
 t_code				*new_label(void);
 t_instruction		*new_instruction(void);
+int					file_destructor(t_file *file);
 void				fill_header(char *dest, char *inst, int size, int err);
 void				add_label(t_file *file, char *label);
 void				add_instruction(t_file *file, char **cmd, int i, int line);
