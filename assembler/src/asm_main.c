@@ -16,7 +16,7 @@ int		main(int ac, char **av)
 {
 	t_file	file;
 
-	if (ac != 2 || (ac == 3 && ft_strcmp(av[1], "-v") != 0))
+	if (ac != 2 && !(ac == 3 && !ft_strcmp(av[1], "-v")))
 		return (ft_puterr(ERROR""RED": assembler needs exactly one file!"E0M,
 						EXIT_FAILURE));
 	else if (ac == 2 || (ac == 3 && ft_strcmp(av[1], "-v") == 0))
@@ -26,13 +26,7 @@ int		main(int ac, char **av)
 			return (EXIT_FAILURE);
 		if (verify_code(&file, NULL, 0, 0) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-<<<<<<< HEAD
-		if (ac == 3 && !ft_strcmp(av[1], "-v"))
-			translate(&file, av[2]);
-=======
 		translate(&file, (ac == 3) ? ft_strcmp(av[1], "-v") == 0 : 0);
-		ft_printf("FILENAME: %s\n", file.name);
->>>>>>> synthesis
 		//free table, lists, char*
 	}
 	return (EXIT_SUCCESS);

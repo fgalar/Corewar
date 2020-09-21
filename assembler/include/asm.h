@@ -46,7 +46,7 @@ typedef struct		s_file
 	t_code			*code_tab;
 }					t_file;
 
-int					translate(t_file *file, char *file_name);
+int					translate(t_file *file, int verbosity);
 
 void				file_init(t_file *file);
 t_code				*new_label(void);
