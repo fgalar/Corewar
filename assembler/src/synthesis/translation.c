@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:12:29 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/16 12:29:44 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/21 11:50:25 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int		translate(t_file *file, int verbosity)
 		{
 			ft_printf(BLUE"%s:\n"E0M, table->label);
 			print_instr(table->instr);
-			//print intrinsic instructions (table->instr)
 		}
 		table = table->next;
 	}

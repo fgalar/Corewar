@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:59:54 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 21:34:28 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/21 11:49:43 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	add_label(t_file *file, char *label)
 		while (aux->next)
 			aux = aux->next;
 		aux->next = new;
-
 	}
 }
 
@@ -48,9 +47,6 @@ void	add_instruction(t_file *file, char **cmd, int i, int line)
 		add_label(file, "MAIN_LABEL");
 	while (aux->next)
 		aux = aux->next;
-	/*if (ft_itersplit(cmd, i))
-		ft_printf("OPCODE: %s = %s\n", ft_itersplit(cmd, i), g_op_tab[new->opcode-1].name);
-	*/
 	iaux = aux->instr;
 	if (!iaux)
 		aux->instr = new;

@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:53:57 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 20:15:47 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/21 11:14:26 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,8 @@ int		valid_params(char **cmd, int x, int i, int line)
 		i = valid;
 		type++;
 	}
-	if (ft_itersplit(cmd, i) && *ft_itersplit(cmd, i) != '#')
-		return (syntax_error(cmd, i, "invalid parameter", line));
-	return (1);
+	return ((ft_itersplit(cmd, i) && *ft_itersplit(cmd, i) != '#') ?
+			syntax_error(cmd, i, "invalid parameter", line) : 1);
 }
 
 int		valid_separator(char **cmd, int i, int nargs, int line)
