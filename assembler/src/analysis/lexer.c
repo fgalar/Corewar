@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 23:55:20 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/20 23:22:05 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/21 10:57:13 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		end_quote(char **cmd, t_file *file, int modif)
 	return (1);
 }
 
-int		is_head(char ** cmd, char *str, int line, unsigned int i)
+int		is_head(char **cmd, char *str, int line, unsigned int i)
 {
 	int				quotes;
 

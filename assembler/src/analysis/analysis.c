@@ -6,11 +6,11 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:11:34 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/20 23:22:39 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/21 10:56:52 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "asm.h"
+#include "asm.h"
 
 void	free_instruction(char **cmd, char *pitcher, char *line, int fd)
 {
@@ -73,6 +73,10 @@ int		capture_syntax(char **cmd, t_file *file, char *inst, int pos)
 	return (0);
 }
 
+/*
+** verif semantics consistency
+*/
+
 int		verify_code(t_file *file, char *line, int l, int s)
 {
 	char	*pitcher;
@@ -97,8 +101,6 @@ int		verify_code(t_file *file, char *line, int l, int s)
 		i++;
 		free_instruction(cmd, NULL, line, -1);
 	}
-	ft_printf(GREEN"NAME: "CYAN"%s\n"E0M, file->playername);
-	ft_printf(GREEN"COMMENT: "CYAN"%s\n"E0M, file->comment);
 	free_instruction(NULL, NULL, line, file->fd);
-	return (EXIT_SUCCESS);// verif semantics consistency
+	return (EXIT_SUCCESS);
 }

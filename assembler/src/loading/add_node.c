@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:59:54 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/20 20:18:38 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/21 11:49:43 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	add_label(t_file *file, char *label)
 		while (aux->next)
 			aux = aux->next;
 		aux->next = new;
-
 	}
 }
 
