@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/20 20:38:33 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/22 14:42:23 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct		s_file
 
 int					translate(t_file *file, int verbosity);
 
-void				file_init(t_file *file);
+void				file_init(t_file *file, char *name);
 t_code				*new_label(void);
 t_instruction		*new_instruction(void);
 int					file_destructor(t_file *file);
@@ -58,7 +58,7 @@ void				add_instruction(t_file *file, char **cmd, int i, int line);
 int					load_params(char **cmd, int x, int i, t_instruction *instr);
 int					load_op(char **cmd, int i, int line, t_instruction *instr);
 
-int					valid_input(char *filename, t_file *file);
+int					valid_input(t_file *file);
 int					valid_reg(char **cmd, int i);
 int					valid_dir(char **cmd, int i);
 int					valid_ind(char **cmd, int i);
