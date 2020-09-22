@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/06 22:07:39 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/06 22:10:24 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/22 02:01:33 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		file_name(char *file, char *end)
 {
-	unsigned int e;
-	int i;
+	unsigned int	e;
+	int				i;
 
 	i = 0;
 	e = ft_strlen(end);
