@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 19:39:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 14:35:28 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/23 00:34:48 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		load_player(t_vm *vm, char *file, int nplayer)
 
 	if ((fd = open(file, O_RDONLY)) < 0)
 	{
-		ft_printf_fd(2, ERROR": %s: Couldn't open file."E0M);
+		ft_printf_fd(2, ERROR": %s: Couldn't open file."E0M, file);
 		return (EXIT_FAILURE);
 	}
 	new = new_player();
