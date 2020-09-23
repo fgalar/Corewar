@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_coordsplit.c                                    :+:      :+:    :+:   */
+/*   op11_15.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/08 23:51:49 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/22 02:02:03 by ciglesia         ###   ########.fr       */
+/*   Created: 2020/09/23 10:28:23 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/09/23 10:30:09 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "disasm.h"
 
-t_coords	ft_coordsplit(char **split, char *pos)
+void							w_sti(t_file *file, int pos)
 {
-	int			x;
-	int			y;
-	t_coords	c;
+	(void)file;
+	(void)pos;
+}
 
-	x = 0;
-	c.i = -1;
-	c.j = -1;
-	c.x = -1;
-	c.y = -1;
-	while (split[x])
-	{
-		y = 0;
-		while (split[x][y])
-		{
-			if (&split[x][y] == pos)
-			{
-				c.i = x;
-				c.j = y;
-				return (c);
-			}
-			y++;
-		}
-		x++;
-	}
-	return (c);
+void							w_fork(t_file *file, int pos)
+{
+	(void)file;
+	(void)pos;
+}
+
+void							w_lld(t_file *file, int pos)
+{
+	(void)file;
+	(void)pos;
+}
+
+void							w_lldi(t_file *file, int pos)
+{
+	(void)file;
+	(void)pos;
+}
+
+void							w_lfork(t_file *file, int pos)
+{
+	(void)file;
+	(void)pos;
 }

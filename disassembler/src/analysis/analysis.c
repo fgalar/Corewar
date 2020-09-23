@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_coordsplit.c                                    :+:      :+:    :+:   */
+/*   analysis.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/08 23:51:49 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/22 02:02:03 by ciglesia         ###   ########.fr       */
+/*   Created: 2020/09/23 11:01:06 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/09/23 20:29:01 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "disasm.h"
 
-t_coords	ft_coordsplit(char **split, char *pos)
+void	is_op(t_uchar byte, int *i)
 {
-	int			x;
-	int			y;
-	t_coords	c;
-
-	x = 0;
-	c.i = -1;
-	c.j = -1;
-	c.x = -1;
-	c.y = -1;
-	while (split[x])
+	(void)i;
+	if (1 <= byte && byte <= 16)
 	{
-		y = 0;
-		while (split[x][y])
-		{
-			if (&split[x][y] == pos)
-			{
-				c.i = x;
-				c.j = y;
-				return (c);
-			}
-			y++;
-		}
-		x++;
+		ft_printf(CYAN"%s "E0M, g_w_tab[byte - 1].name);
 	}
-	return (c);
+}
+
+int		disassemble(t_file *file)
+{
+	int i;
+
+	i = 0;
+	while (file->prog_size - i)
+	{
+		is_op(file->code[i], &i);
+		ft_printf("%.2x ", file->code[i]);
+		i++;
+	}
+	ft_printf("\n");
+	return (EXIT_SUCCESS);
 }

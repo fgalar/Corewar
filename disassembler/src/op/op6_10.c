@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_coordsplit.c                                    :+:      :+:    :+:   */
+/*   op6_10.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/08 23:51:49 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/22 02:02:03 by ciglesia         ###   ########.fr       */
+/*   Created: 2020/09/23 10:29:14 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/09/23 10:29:46 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "disasm.h"
 
-t_coords	ft_coordsplit(char **split, char *pos)
+void							w_and(t_file *file, int pos)
 {
-	int			x;
-	int			y;
-	t_coords	c;
+	(void)file;
+	(void)pos;
+}
 
-	x = 0;
-	c.i = -1;
-	c.j = -1;
-	c.x = -1;
-	c.y = -1;
-	while (split[x])
-	{
-		y = 0;
-		while (split[x][y])
-		{
-			if (&split[x][y] == pos)
-			{
-				c.i = x;
-				c.j = y;
-				return (c);
-			}
-			y++;
-		}
-		x++;
-	}
-	return (c);
+void							w_or(t_file *file, int pos)
+{
+	(void)file;
+	(void)pos;
+}
+
+void							w_xor(t_file *file, int pos)
+{
+	(void)file;
+	(void)pos;
+}
+
+void							w_zjmp(t_file *file, int pos)
+{
+	(void)file;
+	(void)pos;
+}
+
+void							w_ldi(t_file *file, int pos)
+{
+	(void)file;
+	(void)pos;
 }

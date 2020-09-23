@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm_main.c                                         :+:      :+:    :+:   */
+/*   disasm_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/05 22:21:40 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/22 14:43:27 by ciglesia         ###   ########.fr       */
+/*   Created: 2020/09/22 14:16:09 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/09/23 11:02:29 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "disasm.h"
 
 int		main(int ac, char **av)
 {
 	t_file	file;
 
-	if (ac != 2 && (ac == 3 && ft_strcmp(av[1], "-v") != 0))
+	if (ac != 2)
 		return (ft_puterr(ERROR""RED": assembler needs exactly one file!"E0M,
 						EXIT_FAILURE));
-	else if (ac == 2 || (ac == 3 && ft_strcmp(av[1], "-v") == 0))
+	else if (ac == 2)
 	{
-		file_init(&file, (ac == 2) ? av[1] : av[2]);
-		if (valid_input(&file) == EXIT_FAILURE)
+		file_init(&file, av[1]);
+		if (valid_header(&file) == EXIT_FAILURE)
 			return (EXIT_FAILURE + file_destructor(&file));
-		if (verify_code(&file, NULL, 0, 0) == EXIT_FAILURE)
+		if (load_exec(&file) == EXIT_FAILURE)
 			return (EXIT_FAILURE + file_destructor(&file));
-		translate(&file, (ac == 3) ? ft_strcmp(av[1], "-v") == 0 : 0);
+		if (disassemble(&file) == EXIT_FAILURE)
+			return (EXIT_FAILURE + file_destructor(&file));
 		file_destructor(&file);
 	}
 	return (EXIT_SUCCESS);
