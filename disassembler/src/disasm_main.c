@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 14:16:09 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/23 00:28:50 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/23 11:02:29 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int		main(int ac, char **av)
 		if (valid_header(&file) == EXIT_FAILURE)
 			return (EXIT_FAILURE + file_destructor(&file));
 		if (load_exec(&file) == EXIT_FAILURE)
+			return (EXIT_FAILURE + file_destructor(&file));
+		if (disassemble(&file) == EXIT_FAILURE)
 			return (EXIT_FAILURE + file_destructor(&file));
 		file_destructor(&file);
 	}

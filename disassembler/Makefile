@@ -6,7 +6,7 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 19:19:55 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/23 00:32:35 by ciglesia         ###   ########.fr        #
+#    Updated: 2020/09/23 11:03:30 by ciglesia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -34,9 +34,9 @@ DIRLOAD2	=	./asmsrc/loading/
 
 SRC			=	disasm_main.c
 LOADING		=	load_exec.c
-ANALYSIS	=
+ANALYSIS	=	analysis.c
 SYNTHESIS	=
-OP			=
+OP			=	op.c aff.c op11_15.c op1_5.c op6_10.c
 VALIDATION	=	valid_exec.c
 
 LOADING2	=	init_structures.c

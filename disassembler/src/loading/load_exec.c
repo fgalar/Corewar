@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 00:29:17 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/23 00:46:28 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/23 11:02:54 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,5 @@ int		load_exec(t_file *file)
 	size = read(file->fd, &file->code, CHAMP_MAX_SIZE);
 	file->prog_size = size;
 	close(file->fd);
-	int i = 0;
-	while (size - i)
-	{
-		ft_printf("%.2x ", file->code[i]);
-		i++;
-	}
-	ft_printf("\n");
 	return (EXIT_SUCCESS);
 }
