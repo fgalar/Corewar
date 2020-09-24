@@ -1,5 +1,5 @@
 
-    ##deassembler par msa 1.8, made by joe "sasta"
+	##deassembler par msa 1.8, made by joe "sasta"
 #srata
 	.name"Tching tching(Intercepteur),
 

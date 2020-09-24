@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/16 12:27:10 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/23 18:21:05 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct		s_file
 	char			comment[COMMENT_LENGTH];
 	char			playername[PROG_NAME_LENGTH];
 	unsigned char	code[CHAMP_MAX_SIZE];
+	unsigned char	magic_nb[4];
 	t_code			*code_tab;
 }					t_file;
 
@@ -73,4 +74,6 @@ int					is_head(char **cmd, char *str, int line, unsigned int i);
 int					is_label(char **cmd);
 int					is_opcode(char **cmd, int i, int line);
 
+void				collecting_codebytes(t_file *file);
+int					writing_exec(t_file *file);
 #endif
