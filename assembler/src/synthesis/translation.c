@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:12:29 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/24 13:59:15 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/09/24 17:27:47 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ int		translate(t_file *file, int verbosity)
 		}
 		table = table->next;
 	}
-	//writing_exec(file);
+	writing_exec(file);
 	return (0);
 }

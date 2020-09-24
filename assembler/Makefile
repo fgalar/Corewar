@@ -6,7 +6,7 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 19:19:55 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/24 14:02:30 by fgarault         ###   ########.fr        #
+#    Updated: 2020/09/24 17:24:02 by fgarault         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -29,7 +29,7 @@ DIRVALID	=	./src/validation/
 SRC			=	asm_main.c
 LOADING		=	init_structures.c load_file.c add_node.c load_instructions.c destructors.c
 ANALYSIS	=	lexer.c parsing.c analysis.c
-SYNTHESIS	=	translation.c collect_codebytes.c
+SYNTHESIS	=	translation.c collect_codebytes.c utils.c write_binary.c
 OP			=	op.c
 VALIDATION	=	valid_file.c valid_params.c print_err.c
 

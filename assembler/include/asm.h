@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/24 14:03:44 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/09/24 18:49:21 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef	struct		s_args
 	int				reg;
 	char			*dir;
 	char			*ind;
+	size_t			size;
 	struct s_args	*next;
 }					t_args;
 
@@ -30,6 +31,7 @@ typedef struct		s_instr
 	t_uchar			nargs;
 	t_uchar			acb;
 	t_args			*args;
+	size_t			size;
 	struct s_instr	*next;
 }					t_instruction;
 
@@ -88,4 +90,5 @@ int					is_opcode(char **cmd, int i, int line);
 
 void				collecting_codebytes(t_file *file);
 int					writing_exec(t_file *file);
+int					ft_power(int nb, int power);
 #endif
