@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:59:54 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/23 00:14:08 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/24 11:44:08 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ void	add_label(t_file *file, char *label)
 	}
 }
 
-void	add_instruction(t_file *file, char **cmd, int i, int line)
+void	add_instruction(t_file *file, char **cmd, int i)
 {
 	t_instruction	*new;
 	t_code			*aux;
 	t_instruction	*iaux;
 
 	new = new_instruction();
-	load_op(cmd, i, line, new);
+	load_op(cmd, i, new);
 	if (!file->code_tab)
 		add_label(file, "MAIN_LABEL");
 	aux = file->code_tab;
@@ -56,4 +56,27 @@ void	add_instruction(t_file *file, char **cmd, int i, int line)
 			iaux = iaux->next;
 		iaux->next = new;
 	}
+}
+
+void	add_arg(t_instruction *instr, int reg, char *dir, char *ind)
+{
+	t_args	*new;
+	t_args	*aux;
+
+	new = new_args();
+	if (reg)
+		new->reg = reg;
+	if (dir)
+		new->dir = dir;
+	if (ind)
+		new->ind = ind;
+	if (!instr->args)
+	{
+		instr->args = new;
+		return ;
+	}
+	aux = instr->args;
+	while (aux->next)
+		aux = aux->next;
+	aux->next = new;
 }
