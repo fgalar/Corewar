@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:49:08 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/23 00:40:28 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/24 11:43:15 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,50 +46,22 @@ t_instruction	*new_instruction(void)
 	if (!(new = (t_instruction*)malloc(sizeof(t_instruction))))
 		return (NULL);
 	new->opcode = 0;
+	new->nargs = 0;
 	new->acb = 0;
+	new->args = NULL;
+	new->next = NULL;
+	return (new);
+}
+
+t_args			*new_args(void)
+{
+	t_args *new;
+
+	if (!(new = (t_args*)malloc(sizeof(t_args))))
+		return (NULL);
 	new->reg = 0;
 	new->dir = NULL;
 	new->ind = NULL;
 	new->next = NULL;
 	return (new);
-}
-
-void			free_instructions(t_instruction *instr)
-{
-	t_instruction *aux;
-
-	while (instr)
-	{
-		if (instr->dir)
-			free(instr->dir);
-		if (instr->ind)
-			free(instr->ind);
-		aux = instr->next;
-		free(instr);
-		instr = aux;
-	}
-}
-
-int				file_destructor(t_file *file)
-{
-	t_code	*table;
-	t_code	*tabaux;
-
-	if (file->name)
-		free(file->name);
-	if (file->code_tab)
-	{
-		table = file->code_tab;
-		while (table)
-		{
-			if (table->instr)
-				free_instructions(table->instr);
-			if (table->label)
-				free(table->label);
-			tabaux = table->next;
-			free(table);
-			table = tabaux;
-		}
-	}
-	return (0);
 }
