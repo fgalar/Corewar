@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/24 11:44:43 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/24 12:06:26 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int					end_quote(char **cmd, t_file *file, int modif);
 int					lexicon_error(char **cmd, int i, char *err, int line);
 int					syntax_error(char **cmd, int i, char *err, int line);
 int					load_error(char **cmd, int i, char *err, int line);
+void				print_usage(char *str, char *end, char *flag, char *messflag);
 
 int					verify_code(t_file *file, char *line, int l, int s);
 int					is_head(char **cmd, char *str, int line, unsigned int i);
