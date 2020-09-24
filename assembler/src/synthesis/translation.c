@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:12:29 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/24 13:29:43 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/09/24 13:59:15 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,23 @@
 
 void	print_instr(t_instruction *instr)
 {
+	t_args	*args;
 	while (instr)
 	{
 		ft_printf(GREEN"\t%s "E0M, g_op_tab[instr->opcode - 1].name);
-		ft_printf(CYAN"[r%d, %s, %s]\n"E0M, instr->reg, instr->dir, instr->ind);
+		args = instr->args;
+		ft_printf(GREEN"["E0M);
+		while (args)
+		{
+			if (args->reg)
+				ft_printf(CYAN"r%d "E0M, args->reg);
+			if (args->dir)
+				ft_printf(CYAN"%s "E0M, args->dir);
+			if (args->ind)
+				ft_printf(CYAN"%s "E0M, args->ind);
+			args = args->next;
+		}
+		ft_printf(GREEN"]\n"E0M);
 		instr = instr->next;
 	}
 }

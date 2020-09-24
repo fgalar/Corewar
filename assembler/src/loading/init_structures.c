@@ -6,19 +6,22 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:49:08 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/15 19:10:05 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/24 11:43:15 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void			file_init(t_file *file)
+void			file_init(t_file *file, char *name)
 {
 	file->fd = -1;
 	file->line = 0;
 	file->quotes = 0;
+	file->prog_size = 0;
+	file->exec_magic = 0;
 	file->name = NULL;
 	file->code_tab = NULL;
+	file->name = ft_strdup(name);
 	ft_memset(file->comment, 0, COMMENT_LENGTH);
 	ft_memset(file->playername, 0, PROG_NAME_LENGTH);
 	ft_memset(file->code, 0, CHAMP_MAX_SIZE);
@@ -43,7 +46,19 @@ t_instruction	*new_instruction(void)
 	if (!(new = (t_instruction*)malloc(sizeof(t_instruction))))
 		return (NULL);
 	new->opcode = 0;
+	new->nargs = 0;
 	new->acb = 0;
+	new->args = NULL;
+	new->next = NULL;
+	return (new);
+}
+
+t_args			*new_args(void)
+{
+	t_args *new;
+
+	if (!(new = (t_args*)malloc(sizeof(t_args))))
+		return (NULL);
 	new->reg = 0;
 	new->dir = NULL;
 	new->ind = NULL;

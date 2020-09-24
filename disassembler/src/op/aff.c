@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_err.c                                        :+:      :+:    :+:   */
+/*   aff.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/13 20:30:46 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/13 20:42:56 by ciglesia         ###   ########.fr       */
+/*   Created: 2020/09/23 10:28:52 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/09/23 10:51:58 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "disasm.h"
 
-int		lexicon_error(char **cmd, int i, char *err, int ret)
+void							w_aff(t_file *file, int pos)
 {
-	int	spaces;
-
-	spaces = ft_printf_fd(2, ERROR""RED": lexicon: %s"E0M, err);
-	ft_printf_fd(2, ": %s\n", cmd[ft_coordsplit(cmd, ft_itersplit(cmd, i)).i]);
-	spaces += ft_strlen(": ") + ft_coordsplit(cmd, ft_itersplit(cmd, i)).j;
-	ft_repet_fd(' ', spaces, 2);
-	ft_printf_fd(2, "^");
-	return (ret);
+	(void)file;
+	(void)pos;
 }

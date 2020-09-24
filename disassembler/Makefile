@@ -6,11 +6,11 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 19:19:55 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/24 14:02:30 by fgarault         ###   ########.fr        #
+#    Updated: 2020/09/23 11:03:30 by ciglesia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME		=	asm
+NAME		=	disasm
 
 INC			=	./include/
 INC2		=	../libft/include/
@@ -19,6 +19,8 @@ INC4		=	../vm/include/
 INCLUDE		=	-I $(INC) -I $(INC2) -I $(INC3) -I $(INC4)
 INC_LIB		=	-L../libft/ -lft -lncurses
 
+#******************************************************************************#
+
 DIRSRC		=	./src/
 DIRLOAD		=	./src/loading/
 DIRAN		=	./src/analysis/
@@ -26,20 +28,30 @@ DIRSYN		=	./src/synthesis/
 DIROP		=	./src/op/
 DIRVALID	=	./src/validation/
 
-SRC			=	asm_main.c
-LOADING		=	init_structures.c load_file.c add_node.c load_instructions.c destructors.c
-ANALYSIS	=	lexer.c parsing.c analysis.c
-SYNTHESIS	=	translation.c collect_codebytes.c
-OP			=	op.c
-VALIDATION	=	valid_file.c valid_params.c print_err.c
+DIRLOAD2	=	./asmsrc/loading/
 
-SOURCE		=	$(SRC) $(LOADING) $(ANALYSIS) $(SYNTHESIS) $(OP) $(VALIDATION)
+#******************************************************************************#
+
+SRC			=	disasm_main.c
+LOADING		=	load_exec.c
+ANALYSIS	=	analysis.c
+SYNTHESIS	=
+OP			=	op.c aff.c op11_15.c op1_5.c op6_10.c
+VALIDATION	=	valid_exec.c
+
+LOADING2	=	init_structures.c
+
+#******************************************************************************#
+
+SOURCE		=	$(SRC) $(LOADING) $(ANALYSIS) $(SYNTHESIS) $(OP) $(VALIDATION) $(LOADING2)
 
 DIROBJ		=	./depo/
 
 OAUX		=	$(SOURCE:%=$(DIROBJ)%)
 DEPS		=	$(OAUX:.c=.d)
 OBJS		=	$(OAUX:.c=.o)
+
+#******************************************************************************#
 
 ifdef FLAGS
 	ifeq ($(FLAGS), no)
@@ -55,6 +67,8 @@ endif
 CC			=	/usr/bin/gcc
 RM			=	/bin/rm -f
 ECHO		=	/bin/echo -e
+
+#******************************************************************************#
 
 %.o		:		../$(DIRSRC)/%.c
 				$(CC) $(CFLAGS) $(INCLUDE) -MMD -o $@ -c $<
@@ -74,6 +88,11 @@ ECHO		=	/bin/echo -e
 %.o		:		../$(DIRVALID)/%.c
 				$(CC) $(CFLAGS) $(INCLUDE) -MMD -o $@ -c $<
 
+
+%.o		:		../$(DIRLOAD2)/%.c
+				$(CC) $(CFLAGS) $(INCLUDE) -MMD -o $@ -c $<
+
+#******************************************************************************#
 
 $(NAME)	:		$(OBJS)
 				@$(CC) $(INCLUDE) $(CFLAGS) -o $(NAME) $(OBJS) $(INC_LIB)

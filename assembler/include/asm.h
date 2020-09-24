@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/23 18:21:05 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/09/24 14:03:44 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,20 @@
 # include "libft.h"
 # include "op.h"
 
+typedef	struct		s_args
+{
+	int				reg;
+	char			*dir;
+	char			*ind;
+	struct s_args	*next;
+}					t_args;
+
 typedef struct		s_instr
 {
 	t_uchar			opcode;
 	t_uchar			nargs;
 	t_uchar			acb;
-	int				reg;
-	char			*dir;
-	char			*ind;
+	t_args			*args;
 	struct s_instr	*next;
 }					t_instruction;
 
@@ -39,6 +45,8 @@ typedef struct		s_file
 	int				fd;
 	int				line;
 	int				quotes;
+	int				prog_size;
+	int				exec_magic;
 	char			*name;
 	char			comment[COMMENT_LENGTH];
 	char			playername[PROG_NAME_LENGTH];
@@ -49,16 +57,20 @@ typedef struct		s_file
 
 int					translate(t_file *file, int verbosity);
 
-void				file_init(t_file *file);
+void				file_init(t_file *file, char *name);
 t_code				*new_label(void);
 t_instruction		*new_instruction(void);
+t_args				*new_args(void);
+
+int					file_destructor(t_file *file);
 void				fill_header(char *dest, char *inst, int size, int err);
 void				add_label(t_file *file, char *label);
-void				add_instruction(t_file *file, char **cmd, int i, int line);
-int					load_params(char **cmd, int x, int i, t_instruction *instr);
-int					load_op(char **cmd, int i, int line, t_instruction *instr);
+void				add_instruction(t_file *file, char **cmd, int i);
+void				add_arg(t_instruction *instr, int reg, char *dir, char *ind);
+void				load_params(char **cmd, int x, int i, t_instruction *instr);
+void				load_op(char **cmd, int i, t_instruction *instr);
 
-int					valid_input(char *filename, t_file *file);
+int					valid_input(t_file *file);
 int					valid_reg(char **cmd, int i);
 int					valid_dir(char **cmd, int i);
 int					valid_ind(char **cmd, int i);
