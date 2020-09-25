@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:49:08 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/24 11:43:15 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/25 17:51:47 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ t_instruction	*new_instruction(void)
 		return (NULL);
 	new->opcode = 0;
 	new->nargs = 0;
+	new->line = 0;
 	new->acb = 0;
 	new->args = NULL;
 	new->next = NULL;

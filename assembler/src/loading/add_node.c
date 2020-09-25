@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:59:54 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/24 11:44:08 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/25 17:54:16 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	add_instruction(t_file *file, char **cmd, int i)
 
 	new = new_instruction();
 	load_op(cmd, i, new);
+	new->line = file->line;
 	if (!file->code_tab)
 		add_label(file, "MAIN_LABEL");
 	aux = file->code_tab;
