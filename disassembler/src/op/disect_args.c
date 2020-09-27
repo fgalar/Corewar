@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 15:54:53 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/27 17:42:16 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 18:02:50 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** if 0 -> compare function
 */
 
-void	get_arg(t_uchar *code, int pos, t_uchar *move, t_file *file)
+void		get_arg(t_uchar *code, int pos, t_uchar *move, t_file *file)
 {
 	int		ret;
 	int		value;

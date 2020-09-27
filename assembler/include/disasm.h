@@ -6,14 +6,14 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 14:46:23 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/27 17:41:55 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 18:03:24 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DISASM_H
 # define DISASM_H
 
-#include "asm.h"
+# include "asm.h"
 
 # define REG					1
 # define DIR					2

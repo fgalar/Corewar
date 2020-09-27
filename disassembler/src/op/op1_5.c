@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 10:27:17 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/27 17:35:48 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 18:02:31 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void							w_sub(t_file *file, int *pos)
 	t_uchar	acb;
 
 	acb = file->code[*pos + 1];
-	if (is_argsize(4, acb, 3) && is_reg(file->code,*pos + 2) &&
+	if (is_argsize(4, acb, 3) && is_reg(file->code, *pos + 2) &&
 		is_reg(file->code, *pos + 3) && is_reg(file->code, *pos + 4))
 	{
 		ft_printf_fd(file->fd, "r%d, ", file->code[*pos + 2]);
