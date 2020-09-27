@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:12:29 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/24 11:46:17 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/25 18:26:39 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	print_instr(t_instruction *instr)
 {
 	t_args	*args;
+
 	while (instr)
 	{
 		ft_printf(GREEN"\t%s "E0M, g_op_tab[instr->opcode - 1].name);

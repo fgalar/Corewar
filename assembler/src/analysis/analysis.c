@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 18:11:34 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/24 11:45:02 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/25 17:57:14 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,5 @@ int		verify_code(t_file *file, char *line, int l, int s)
 		free_instruction(cmd, NULL, line, -1);
 	}
 	free_instruction(NULL, NULL, line, file->fd);
-	return (EXIT_SUCCESS);
+	return (unknown_labels(file->code_tab) ? EXIT_FAILURE : EXIT_SUCCESS);
 }

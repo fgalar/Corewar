@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/24 12:06:26 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 17:39:35 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,24 @@
 # include "libft.h"
 # include "op.h"
 
+# define MAX_ARG_SIZE 4
+
 typedef	struct		s_args
 {
 	int				reg;
 	char			*dir;
 	char			*ind;
+	t_uchar			hex[MAX_ARG_SIZE];
+	t_arg_type		size;
 	struct s_args	*next;
 }					t_args;
 
 typedef struct		s_instr
 {
+	int				line;
 	t_uchar			opcode;
 	t_uchar			nargs;
+	t_arg_type		size;
 	t_uchar			acb;
 	t_args			*args;
 	struct s_instr	*next;
@@ -47,10 +53,11 @@ typedef struct		s_file
 	int				quotes;
 	int				prog_size;
 	int				exec_magic;
+	t_uchar			type;
 	char			*name;
 	char			comment[COMMENT_LENGTH];
 	char			playername[PROG_NAME_LENGTH];
-	unsigned char	code[CHAMP_MAX_SIZE];
+	t_uchar			code[CHAMP_MAX_SIZE];
 	t_code			*code_tab;
 }					t_file;
 
@@ -65,7 +72,8 @@ int					file_destructor(t_file *file);
 void				fill_header(char *dest, char *inst, int size, int err);
 void				add_label(t_file *file, char *label);
 void				add_instruction(t_file *file, char **cmd, int i);
-void				add_arg(t_instruction *instr, int reg, char *dir, char *ind);
+void				add_arg(t_instruction *instr, int reg, char *dir,
+																	char *ind);
 void				load_params(char **cmd, int x, int i, t_instruction *instr);
 void				load_op(char **cmd, int i, t_instruction *instr);
 
@@ -74,12 +82,15 @@ int					valid_reg(char **cmd, int i);
 int					valid_dir(char **cmd, int i);
 int					valid_ind(char **cmd, int i);
 int					valid_params(char **cmd, int x, int i, int line);
+int					unknown_labels(t_code *code);
 int					valid_separator(char **cmd, int i, int nargs, int line);
 int					end_quote(char **cmd, t_file *file, int modif);
 int					lexicon_error(char **cmd, int i, char *err, int line);
 int					syntax_error(char **cmd, int i, char *err, int line);
+int					a_error(char *type, char *err);
 int					load_error(char **cmd, int i, char *err, int line);
-void				print_usage(char *str, char *end, char *flag, char *messflag);
+void				print_usage(char *str, char *end, char *flag,
+																char *messflag);
 
 int					verify_code(t_file *file, char *line, int l, int s);
 int					is_head(char **cmd, char *str, int line, unsigned int i);

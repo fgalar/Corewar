@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:49:08 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/24 11:43:15 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 17:39:55 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void			file_init(t_file *file, char *name)
 	file->quotes = 0;
 	file->prog_size = 0;
 	file->exec_magic = 0;
+	file->type = 0;
 	file->name = NULL;
 	file->code_tab = NULL;
 	file->name = ft_strdup(name);
@@ -47,6 +48,8 @@ t_instruction	*new_instruction(void)
 		return (NULL);
 	new->opcode = 0;
 	new->nargs = 0;
+	new->size = 0;
+	new->line = 0;
 	new->acb = 0;
 	new->args = NULL;
 	new->next = NULL;
@@ -59,6 +62,8 @@ t_args			*new_args(void)
 
 	if (!(new = (t_args*)malloc(sizeof(t_args))))
 		return (NULL);
+	ft_memset(new->hex, 0, MAX_ARG_SIZE);
+	new->size = 0;
 	new->reg = 0;
 	new->dir = NULL;
 	new->ind = NULL;
