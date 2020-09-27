@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 10:28:23 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/27 11:36:52 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 17:01:43 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,75 @@
 void							w_sti(t_file *file, int *pos)
 {
 	t_uchar	acb;
+	int		args;
+	t_uchar	type;
+	t_uchar	mv;
 
 	acb = file->code[*pos + 1];
+	args = 3;
+	mv = 0;
+	if (is_argsize(10, acb, args))
+	{
+		while (args--)
+		{
+			type = (acb >> ((args + 1) * 2)) & 0b11;
+			if (type == REG && !is_reg(file->code, *pos + 2 + mv))
+				break ;
+			get_arg(file->code, *pos, &mv, type + 4);
+			if (args)
+				ft_printf(", ");
+		}
+	}
 	*pos += octal_shift(acb, 2, 3);
 }
 
 void							w_fork(t_file *file, int *pos)
 {
-	(void)file;
+	int	move;
+
+	move = reverse_bytes(file->code, *pos + 1, 2);
+	ft_printf("%%%d", move);
 	*pos += 3;
 }
 
 void							w_lld(t_file *file, int *pos)
 {
 	t_uchar	acb;
+	int		reg;
+	int		move;
 
 	acb = file->code[*pos + 1];
+	if (is_argsize(12, acb, 2))
+	{
+		reg = *pos + 6 - ((acb & 0b01100000) >> 5);
+		if (is_reg(file->code, reg))
+		{
+			if (p_acb(acb, 1) == DIR)
+			{
+				move = reverse_bytes(file->code, *pos + 2, 4);
+				ft_printf("%%%d, ", move);
+			}
+			else
+			{
+				move = reverse_bytes(file->code, *pos + 2, 2);
+				ft_printf("%d, ", move);
+			}
+			ft_printf("r%d", file->code[reg]);
+		}
+	}
 	*pos += octal_shift(acb, 4, 2);
 }
 
 void							w_lldi(t_file *file, int *pos)
 {
-	t_uchar	acb;
-
-	acb = file->code[*pos + 1];
-	*pos += octal_shift(acb, 2, 3);
+	disect_args(file->code, pos, 2);
 }
 
 void							w_lfork(t_file *file, int *pos)
 {
-	(void)file;
+	int	move;
+
+	move = reverse_bytes(file->code, *pos + 1, 2);
+	ft_printf("%%%d", move);
 	*pos += 3;
 }

@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 14:46:23 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/27 13:05:01 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 16:42:19 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ int								reverse_bytes(t_uchar *code, unsigned int pc,
 int								is_argsize(t_uchar ir, t_uchar acb,
 											t_uchar narg);
 int								p_acb(t_uchar acb, int p_number);
+int								is_reg(t_uchar *code, int nb);
 
+void		get_arg(t_uchar *code, int pos, t_uchar *move, t_uchar type);
+void							disect_args(t_uchar *code, int *pos, int l);
 void							w_live(t_file *file, int *pos);
 void							w_ld(t_file *file, int *pos);
 void							w_st(t_file *file, int *pos);

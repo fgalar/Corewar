@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/27 11:38:06 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/27 13:05:11 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 16:33:24 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,30 +84,10 @@ int		reverse_bytes(t_uchar *code, unsigned int pc, int bytes)
 	return (-1);
 }
 
-/*
-int		get_arg(t_uchar *code, int pos, t_uchar *move, t_uchar type)
+int		is_reg(t_uchar *code, int nb)
 {
-	int		ret;
-	int		value;
-	t_uchar	label;
+	int comp;
 
-	label = (type >> 0b10) ? 0b10 : 0b100;
-	if ((type & 0b11) == REG)
-	{
-		value = code[pos + 2 + (*move)++)];
-	//ret = ((TP*)P->obj)->reg[value - 1];
-	}
-	else if ((type & 0b11) == DIR)
-	{
-		ret = reverse_bytes(code, pos + 2 + *move, label);
-		*move += label;
-	}
-	else
-	{
-		value = reverse_bytes(code, pos + 2 + *move, 2) % IDX_MOD;
-		ret = reverse_bytes(code, pos + value, 4);
-		*move += 2;
-	}
-	return (ret);
+	comp = code[nb];
+	return (1 <= comp && comp <= 16);
 }
-*/

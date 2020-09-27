@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 10:29:14 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/27 11:33:25 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 17:06:40 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,29 @@
 
 void							w_and(t_file *file, int *pos)
 {
-	t_uchar	acb;
-
-	acb = file->code[*pos + 1];
-	*pos += octal_shift(acb, 4, 3);
+	disect_args(file->code, pos, 0);
 }
 
 void							w_or(t_file *file, int *pos)
 {
-	t_uchar	acb;
-
-	acb = file->code[*pos + 1];
-	*pos += octal_shift(acb, 4, 3);
+	disect_args(file->code, pos, 0);
 }
 
 void							w_xor(t_file *file, int *pos)
 {
-	t_uchar	acb;
-
-	acb = file->code[*pos + 1];
-	*pos += octal_shift(acb, 4, 3);
+	disect_args(file->code, pos, 0);
 }
 
 void							w_zjmp(t_file *file, int *pos)
 {
-	(void)file;
+	int move;
+
+	move = reverse_bytes(file->code, *pos + 1, 2) % IDX_MOD;
+	ft_printf("%%%d", move);
 	*pos += 3;
 }
 
 void							w_ldi(t_file *file, int *pos)
 {
-	t_uchar	acb;
-
-	acb = file->code[*pos + 1];
-	*pos += octal_shift(acb, 2, 3);
+	disect_args(file->code, pos, 2);
 }

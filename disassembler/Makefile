@@ -6,7 +6,7 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 19:19:55 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/27 11:39:54 by ciglesia         ###   ########.fr        #
+#    Updated: 2020/09/27 16:29:08 by ciglesia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -36,7 +36,7 @@ SRC			=	disasm_main.c
 LOADING		=	load_exec.c
 ANALYSIS	=	analysis.c byte_management.c
 SYNTHESIS	=
-OP			=	op.c aff.c op11_15.c op1_5.c op6_10.c
+OP			=	op.c aff.c op11_15.c op1_5.c op6_10.c disect_args.c
 VALIDATION	=	valid_exec.c
 
 LOADING2	=	init_structures.c destructors.c
