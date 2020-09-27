@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 11:01:06 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/27 12:01:46 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 17:53:59 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ int		is_op(t_file *file, int *i)
 	byte = file->code[*i];
 	if (1 <= byte && byte <= 16)
 	{
-		ft_printf(CYAN"%s "E0M, g_w_tab[byte - 1].name);
+		ft_printf_fd(file->fd, "%s\t", g_w_tab[byte - 1].name);
+		if (ft_strlen(g_w_tab[byte - 1].name) < 4)
+			ft_printf_fd(file->fd, "\t");
 		g_w_tab[byte - 1].f(file, i);
-		ft_printf("\n");
+		ft_printf_fd(file->fd, "\n");
 		return (1);
 	}
 	return (0);
@@ -36,8 +38,6 @@ int		disassemble(t_file *file)
 	{
 		if (!is_op(file, &i))
 			break ;
-		//ft_printf("%.2x ", file->code[i]);
 	}
-	ft_printf("\n");
 	return (EXIT_SUCCESS);
 }

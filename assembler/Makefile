@@ -6,11 +6,11 @@
 #    By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/08/20 19:19:55 by ciglesia          #+#    #+#              #
-#    Updated: 2020/09/24 11:10:28 by ciglesia         ###   ########.fr        #
+#    Updated: 2020/09/27 17:14:55 by ciglesia         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME		=	asm
+NAME		=	../asm
 
 INC			=	./include/
 INC2		=	../libft/include/

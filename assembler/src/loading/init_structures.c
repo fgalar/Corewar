@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:49:08 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/27 11:07:30 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 17:39:55 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void			file_init(t_file *file, char *name)
 	file->quotes = 0;
 	file->prog_size = 0;
 	file->exec_magic = 0;
+	file->type = 0;
 	file->name = NULL;
 	file->code_tab = NULL;
 	file->name = ft_strdup(name);

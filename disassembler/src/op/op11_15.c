@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 10:28:23 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/27 17:01:43 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 17:43:45 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ void							w_sti(t_file *file, int *pos)
 			type = (acb >> ((args + 1) * 2)) & 0b11;
 			if (type == REG && !is_reg(file->code, *pos + 2 + mv))
 				break ;
-			get_arg(file->code, *pos, &mv, type + 4);
+			file->type = type + 4;
+			get_arg(file->code, *pos, &mv, file);
 			if (args)
-				ft_printf(", ");
+				ft_printf_fd(file->fd, ", ");
 		}
 	}
 	*pos += octal_shift(acb, 2, 3);
@@ -42,7 +43,7 @@ void							w_fork(t_file *file, int *pos)
 	int	move;
 
 	move = reverse_bytes(file->code, *pos + 1, 2);
-	ft_printf("%%%d", move);
+	ft_printf_fd(file->fd, "%%%d", move);
 	*pos += 3;
 }
 
@@ -61,14 +62,14 @@ void							w_lld(t_file *file, int *pos)
 			if (p_acb(acb, 1) == DIR)
 			{
 				move = reverse_bytes(file->code, *pos + 2, 4);
-				ft_printf("%%%d, ", move);
+				ft_printf_fd(file->fd, "%%%d, ", move);
 			}
 			else
 			{
 				move = reverse_bytes(file->code, *pos + 2, 2);
-				ft_printf("%d, ", move);
+				ft_printf_fd(file->fd, "%d, ", move);
 			}
-			ft_printf("r%d", file->code[reg]);
+			ft_printf_fd(file->fd, "r%d", file->code[reg]);
 		}
 	}
 	*pos += octal_shift(acb, 4, 2);
@@ -76,7 +77,7 @@ void							w_lld(t_file *file, int *pos)
 
 void							w_lldi(t_file *file, int *pos)
 {
-	disect_args(file->code, pos, 2);
+	disect_args(file->code, pos, 2, file);
 }
 
 void							w_lfork(t_file *file, int *pos)
@@ -84,6 +85,6 @@ void							w_lfork(t_file *file, int *pos)
 	int	move;
 
 	move = reverse_bytes(file->code, *pos + 1, 2);
-	ft_printf("%%%d", move);
+	ft_printf_fd(file->fd, "%%%d", move);
 	*pos += 3;
 }
