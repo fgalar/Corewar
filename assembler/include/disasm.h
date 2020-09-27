@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 14:46:23 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/23 11:07:59 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 13:05:01 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define DISASM_H
 
 #include "asm.h"
+
+# define REG					1
+# define DIR					2
+# define IND					3
 
 typedef struct					s_w
 {
@@ -25,7 +29,7 @@ typedef struct					s_w
 	char						*description;
 	t_uchar						octal;
 	t_uchar						label;
-	void						(*f)(t_file *file, int pos);
+	void						(*f)(t_file *file, int *pos);
 }								t_w;
 
 int								valid_header(t_file *file);
@@ -33,23 +37,30 @@ int								valid_header(t_file *file);
 int								load_exec(t_file *file);
 
 int								disassemble(t_file *file);
+int								octal_shift(t_uchar acb, t_uchar label_size,
+											t_uchar narg);
+int								reverse_bytes(t_uchar *code, unsigned int pc,
+											int bytes);
+int								is_argsize(t_uchar ir, t_uchar acb,
+											t_uchar narg);
+int								p_acb(t_uchar acb, int p_number);
 
-void							w_live(t_file *file, int pos);
-void							w_ld(t_file *file, int pos);
-void							w_st(t_file *file, int pos);
-void							w_add(t_file *file, int pos);
-void							w_sub(t_file *file, int pos);
-void							w_and(t_file *file, int pos);
-void							w_or(t_file *file, int pos);
-void							w_xor(t_file *file, int pos);
-void							w_zjmp(t_file *file, int pos);
-void							w_ldi(t_file *file, int pos);
-void							w_sti(t_file *file, int pos);
-void							w_fork(t_file *file, int pos);
-void							w_lld(t_file *file, int pos);
-void							w_lldi(t_file *file, int pos);
-void							w_lfork(t_file *file, int pos);
-void							w_aff(t_file *file, int pos);
+void							w_live(t_file *file, int *pos);
+void							w_ld(t_file *file, int *pos);
+void							w_st(t_file *file, int *pos);
+void							w_add(t_file *file, int *pos);
+void							w_sub(t_file *file, int *pos);
+void							w_and(t_file *file, int *pos);
+void							w_or(t_file *file, int *pos);
+void							w_xor(t_file *file, int *pos);
+void							w_zjmp(t_file *file, int *pos);
+void							w_ldi(t_file *file, int *pos);
+void							w_sti(t_file *file, int *pos);
+void							w_fork(t_file *file, int *pos);
+void							w_lld(t_file *file, int *pos);
+void							w_lldi(t_file *file, int *pos);
+void							w_lfork(t_file *file, int *pos);
+void							w_aff(t_file *file, int *pos);
 
 extern t_w						g_w_tab[17];
 
