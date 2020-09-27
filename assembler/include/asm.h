@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/25 18:35:56 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 10:25:25 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@
 # include "libft.h"
 # include "op.h"
 
+# define MAX_ARG_SIZE 4
+
 typedef	struct		s_args
 {
 	int				reg;
 	char			*dir;
 	char			*ind;
+	t_uchar			hex[MAX_ARG_SIZE];
+	t_arg_type		size;
 	struct s_args	*next;
 }					t_args;
 
@@ -29,6 +33,7 @@ typedef struct		s_instr
 	int				line;
 	t_uchar			opcode;
 	t_uchar			nargs;
+	t_arg_type		size;
 	t_uchar			acb;
 	t_args			*args;
 	struct s_instr	*next;

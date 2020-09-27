@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:53:57 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/25 18:35:20 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/27 11:05:55 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		exist_label(t_code *code, char *label, int line)
 			return (1);
 		code = code->next;
 	}
-	spaces = a_error("syntax", "Unknown label");
+	spaces = a_error("syntax", "Invalid or Unknown label");
 	ft_printf_fd(2, ": in line %d: "BOLD"%s\n", line, label);
 	spaces += ft_strlen(": in line :");
 	spaces += ft_sizei(line) + ft_strlen(label);
