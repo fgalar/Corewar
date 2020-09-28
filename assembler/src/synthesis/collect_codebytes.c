@@ -6,23 +6,27 @@
 /*   By: fgarault <fgarault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 16:45:01 by fgarault          #+#    #+#             */
-/*   Updated: 2020/09/24 19:12:27 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/09/28 21:54:03 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-#include <stdio.h>
 
-void	translate_to_bytecode(unsigned char *dest, unsigned int nb, size_t size)
+t_uchar	*itob(t_uchar *dest, unsigned int nb, int size)
 {
-	while (--size > 0 && nb)
+	if (!(dest = malloc(sizeof(t_uchar) * size)))
+		return (NULL);
+	ft_bzero(dest, size);
+	while (--size && nb >= (16 * 16))
 	{
 		dest[size] = nb % (16 * 16);
 		nb /= (16 * 16);
 	}
+	dest[size] = nb % (16 * 16);
+	return (dest);
 }
 
-char	get_argument_coding_byte(t_instruction *instruction)
+char	get_acb(t_instruction *instruction)
 {
 	t_args	*argument;
 	int		i;
@@ -44,12 +48,14 @@ char	get_argument_coding_byte(t_instruction *instruction)
 	}
 	return (acb);
 }
+
 int		is_bigger_arg(t_instruction *instr)
 {
 	char *op;
 
 	op = g_op_tab[instr->opcode - 1].name;
-	if (!ft_strcmp("and", op) || !ft_strcmp("or", op) || !ft_strcmp("xor", op))
+	if (!ft_strcmp("and", op) || !ft_strcmp("or", op) || !ft_strcmp("xor", op)
+		|| !ft_strcmp("live", op) || !ft_strcmp("ld", op))
 		return (1);
 	return (0);
 }
@@ -64,18 +70,18 @@ int		get_sizeof(t_instruction *instruction)
 	while (argument)
 	{
 		if (argument->reg)
-			argument->size = 1;
+			argument->arg_size = 1;
 		else if (argument->ind)
-			argument->size = 2;
+			argument->arg_size = 2;
 		else if (argument->dir)
 		{
 			if (is_bigger_arg(instruction))
-				argument->size = 4;
+				argument->arg_size = 4;
 			else
-				argument->size = 2;
+				argument->arg_size = 2;
 		}
-		total += argument->size;
-		argument = argument->next;	
+		total += argument->arg_size;
+		argument = argument->next;
 	}
 	return (total);
 }
@@ -86,20 +92,23 @@ void	collecting_codebytes(t_file *file)
 	t_instruction	*ins;
 
 	tab = file->code_tab;
-	ins = tab->instr;
-	ft_bzero(file->magic_nb, 4);//Can Andre init this in init_struct ? or replace file->code with it
-	translate_to_bytecode(file->magic_nb, COREWAR_EXEC_MAGIC, 4);
 	while (tab)
 	{
-
+		tab->mem_pos = file->prog_size;
+		ins = tab->instr;
 		while (ins)
 		{
-			ins->acb = get_argument_coding_byte(ins);
-			ins->size = get_sizeof(ins);
-			ft_printf("%d\n", ins->size);
+			ins->mem_pos = file->prog_size;
+			if (ins->nargs > 1)
+				ins->acb = get_acb(ins);
+			if (ins->acb)
+				file->prog_size += get_sizeof(ins) + 2;
+			else
+				file->prog_size += get_sizeof(ins) + 1;
 			ins = ins->next;
 		}
 		tab = tab->next;
 	}
+	get_addr(file->code_tab);
 	writing_exec(file);
 }
