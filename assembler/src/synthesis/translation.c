@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 19:12:29 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/28 21:24:43 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/09/29 17:05:48 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	print_hex(t_instruction *instr)
 	while (args)
 	{
 		if (args->reg)
-			print_multi_hex(args->hex, args->arg_size);
+			print_multi_hex(args->hex, args->size);
 		if (args->dir)
-			print_multi_hex(args->hex, args->arg_size);
+			print_multi_hex(args->hex, args->size);
 		if (args->ind)
-			print_multi_hex(args->hex, args->arg_size);
+			print_multi_hex(args->hex, args->size);
 		args = args->next;
 	}
 	ft_printf("\n");

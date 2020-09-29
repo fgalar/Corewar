@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/28 23:28:43 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/09/29 17:35:28 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef	struct		s_args
 	char			*dir;
 	char			*ind;
 	t_uchar			*hex;
-	int				arg_size;
+	int				size;
 	struct s_args	*next;
 }					t_args;
 
@@ -33,7 +33,7 @@ typedef struct		s_instr
 	t_uchar			nargs;
 	t_uchar			acb;
 	t_args			*args;
-	int				instr_size;
+	int				size;
 	int				mem_pos;
 	struct s_instr	*next;
 }					t_instruction;
@@ -61,7 +61,6 @@ typedef struct		s_file
 }					t_file;
 
 int					translate(t_file *file, int verbosity);
-void				aff_exec(t_file *file);
 
 void				file_init(t_file *file, char *name);
 t_code				*new_label(void);
@@ -72,7 +71,8 @@ int					file_destructor(t_file *file);
 void				fill_header(char *dest, char *inst, int size, int err);
 void				add_label(t_file *file, char *label);
 void				add_instruction(t_file *file, char **cmd, int i);
-void				add_arg(t_instruction *instr, int reg, char *dir, char *ind);
+void				add_arg(t_instruction *instr, int reg, char *dir,
+char *ind);
 void				load_params(char **cmd, int x, int i, t_instruction *instr);
 void				load_op(char **cmd, int i, t_instruction *instr);
 
@@ -93,11 +93,9 @@ int					is_label(char **cmd);
 int					is_opcode(char **cmd, int i, int line);
 
 void				collecting_codebytes(t_file *file);
-t_uchar				*itob(t_uchar *dest, unsigned int nb, int size);
 void				get_addr(t_code *code_tab);
-
 int					writing_exec(t_file *file);
 
-
+t_uchar				*itob(t_uchar *dest, unsigned int nb, int size);
 int					ft_power(int nb, int power);
 #endif

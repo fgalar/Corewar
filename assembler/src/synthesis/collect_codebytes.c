@@ -6,27 +6,13 @@
 /*   By: fgarault <fgarault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/23 16:45:01 by fgarault          #+#    #+#             */
-/*   Updated: 2020/09/28 21:54:03 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/09/29 17:17:49 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-t_uchar	*itob(t_uchar *dest, unsigned int nb, int size)
-{
-	if (!(dest = malloc(sizeof(t_uchar) * size)))
-		return (NULL);
-	ft_bzero(dest, size);
-	while (--size && nb >= (16 * 16))
-	{
-		dest[size] = nb % (16 * 16);
-		nb /= (16 * 16);
-	}
-	dest[size] = nb % (16 * 16);
-	return (dest);
-}
-
-char	get_acb(t_instruction *instruction)
+static char		get_acb(t_instruction *instruction)
 {
 	t_args	*argument;
 	int		i;
@@ -49,7 +35,7 @@ char	get_acb(t_instruction *instruction)
 	return (acb);
 }
 
-int		is_bigger_arg(t_instruction *instr)
+static int		is_bigger_arg(t_instruction *instr)
 {
 	char *op;
 
@@ -60,7 +46,7 @@ int		is_bigger_arg(t_instruction *instr)
 	return (0);
 }
 
-int		get_sizeof(t_instruction *instruction)
+static int		get_sizeof(t_instruction *instruction)
 {
 	t_args	*argument;
 	int		total;
@@ -70,23 +56,23 @@ int		get_sizeof(t_instruction *instruction)
 	while (argument)
 	{
 		if (argument->reg)
-			argument->arg_size = 1;
+			argument->size = 1;
 		else if (argument->ind)
-			argument->arg_size = 2;
+			argument->size = 2;
 		else if (argument->dir)
 		{
 			if (is_bigger_arg(instruction))
-				argument->arg_size = 4;
+				argument->size = 4;
 			else
-				argument->arg_size = 2;
+				argument->size = 2;
 		}
-		total += argument->arg_size;
+		total += argument->size;
 		argument = argument->next;
 	}
 	return (total);
 }
 
-void	collecting_codebytes(t_file *file)
+void			collecting_codebytes(t_file *file)
 {
 	t_code			*tab;
 	t_instruction	*ins;

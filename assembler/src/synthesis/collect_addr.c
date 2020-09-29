@@ -6,7 +6,7 @@
 /*   By: fgarault <fgarault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 15:43:14 by fgarault          #+#    #+#             */
-/*   Updated: 2020/09/29 01:52:59 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/09/29 17:07:35 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ int		get_label(t_code *code_tab, char *label)
 void	put_addr(t_args *arg, t_code *tab, int cur_pos)
 {
 	if (arg->reg)
-		arg->hex = itob(arg->hex, arg->reg, arg->arg_size);
+		arg->hex = itob(arg->hex, arg->reg, arg->size);
 	else if (arg->ind)
 	{
 		if (arg->ind[0] == LABEL_CHAR)
 			arg->hex = itob(arg->hex, (get_label(tab, &arg->ind[1]) - cur_pos),
-			arg->arg_size);
+			arg->size);
 		else
-			arg->hex = itob(arg->hex, ft_atoi(arg->ind), arg->arg_size);
+			arg->hex = itob(arg->hex, ft_atoi(arg->ind), arg->size);
 	}
 	else if (arg->dir)
 	{
 		if (arg->dir[1] == LABEL_CHAR)
 			arg->hex = itob(arg->hex, (get_label(tab, &arg->dir[2]) - cur_pos),
-			arg->arg_size);
+			arg->size);
 		else
-			arg->hex = itob(arg->hex, ft_atoi(&arg->dir[1]), arg->arg_size);
+			arg->hex = itob(arg->hex, ft_atoi(&arg->dir[1]), arg->size);
 	}
 }
 

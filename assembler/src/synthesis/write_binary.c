@@ -6,7 +6,7 @@
 /*   By: fgarault <fgarault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 12:48:19 by fgarault          #+#    #+#             */
-/*   Updated: 2020/09/28 23:37:40 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/09/29 17:43:30 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int		compiled_name(t_file *file)
 		name[i] = file->name[i];
 		i++;
 	}
-	ft_strcat(name, ".corbis");
+	ft_strcat(name, ".cor");
 	if ((fd = open(name, O_RDWR | O_CREAT, 00666)) == -1)
 	{
 		free(name);
@@ -46,8 +46,9 @@ static int		write_header(t_file *file, int fd)
 	magic = NULL;
 	size = NULL;
 	i = 0;
-	magic = itob(magic, COREWAR_EXEC_MAGIC, 4);
-	size = itob(size, file->prog_size, 8);
+	if (!(magic = itob(magic, COREWAR_EXEC_MAGIC, 4))
+		|| !(size = itob(size, file->prog_size, 8)))
+		return (0);
 	write(fd, magic, 4);
 	write(fd, file->playername, PROG_NAME_LENGTH);
 	write(fd, size, 8);
@@ -59,7 +60,7 @@ static int		write_header(t_file *file, int fd)
 	return (1);
 }
 
-static int		write_prog(t_file *file, int fd)
+static void		write_prog(t_file *file, int fd)
 {
 	t_code			*tab;
 	t_instruction	*ins;
@@ -76,14 +77,13 @@ static int		write_prog(t_file *file, int fd)
 			ins->nargs > 1 ? write(fd, &ins->acb, 1) : 0;
 			while (arg)
 			{
-				write(fd, arg->hex, arg->arg_size);
+				write(fd, arg->hex, arg->size);
 				arg = arg->next;
 			}
 			ins = ins->next;
 		}
 		tab = tab->next;
 	}
-	return (0);
 }
 
 int				writing_exec(t_file *file)
