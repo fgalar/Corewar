@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 21:50:15 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 21:33:37 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/29 20:27:12 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct		s_vm
 	t_list			*processes;
 	t_player		*player;
 	int				dump_param;
+	int				verbosity;
 	int				nplayers;
 	int				last_alive;
 	int				nprocess;
@@ -124,6 +125,7 @@ void				add_player(t_vm *vm, t_player *new);
 t_player			*new_player();
 int					add_process(t_vm *vm, t_list *process, unsigned int pc);
 void				kill_players(t_vm *vm);
+int					player_won(int last_alive, t_player *champion);
 
 /*
 ** validation
@@ -139,7 +141,7 @@ int					valid_header(int fd, char *file);
 */
 
 int					vm_init(t_vm *vm);
-int					run_processes(t_vm *vm);
+int					run_processes(t_vm *vm, int control);
 int					print_ram(t_vm *vm);
 int					is_ir(t_list *process, int i);
 int					is_pc(t_list *process, int i);

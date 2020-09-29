@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 17:09:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/12 14:43:15 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/29 20:31:23 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,17 @@ void		add_player(t_vm *vm, t_player *new)
 	vm->nplayers++;
 }
 
+int			player_won(int last_alive, t_player *champion)
+{
+	while (champion)
+	{
+		if (last_alive == champion->nplayer)
+			ft_printf("Player %d (%s) won\n", last_alive, champion->name);
+		champion = champion->next;
+	}
+	return (last_alive);
+}
+
 void		kill_players(t_vm *vm)
 {
 	t_player *champion;
@@ -47,7 +58,7 @@ void		kill_players(t_vm *vm)
 	champion = vm->player;
 	while (champion)
 	{
-		ft_printf("killing: %s\n", champion->name);
+		(vm->verbosity) ? ft_printf(CYAN"Killing: %s\n"E0M, champion->name) : 0;
 		aux = champion;
 		champion = champion->next;
 		free(aux);
