@@ -6,7 +6,7 @@
 /*   By: fgarault <fgarault@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/22 12:48:19 by fgarault          #+#    #+#             */
-/*   Updated: 2020/09/29 17:43:30 by fgarault         ###   ########.fr       */
+/*   Updated: 2020/09/30 11:37:28 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,21 @@ static int		compiled_name(t_file *file)
 
 static int		write_header(t_file *file, int fd)
 {
-	t_uchar		*magic;
-	t_uchar		*size;
+	t_uchar		magic[4];
+	t_uchar		size[8];
 	int			i;
 
-	magic = NULL;
-	size = NULL;
+	ft_bzero(magic, 4);
+	ft_bzero(size, 8);
 	i = 0;
-	if (!(magic = itob(magic, COREWAR_EXEC_MAGIC, 4))
-		|| !(size = itob(size, file->prog_size, 8)))
-		return (0);
+	itob(magic, COREWAR_EXEC_MAGIC, 4);
+	itob(size, file->prog_size, 8);
 	write(fd, magic, 4);
 	write(fd, file->playername, PROG_NAME_LENGTH);
 	write(fd, size, 8);
 	write(fd, file->comment, COMMENT_LENGTH);
 	while (i++ < 4)
 		ft_printf_fd(fd, "%c", 0);
-	free(magic);
-	free(size);
 	return (1);
 }
 
