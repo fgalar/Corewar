@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 21:50:15 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/29 20:27:12 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/30 19:59:37 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void				add_player(t_vm *vm, t_player *new);
 t_player			*new_player();
 int					add_process(t_vm *vm, t_list *process, unsigned int pc);
 void				kill_players(t_vm *vm);
-int					player_won(int last_alive, t_player *champion);
+void				player_won(t_vm *vm, t_player *champion, int ncurses);
 
 /*
 ** validation
@@ -186,6 +186,8 @@ int					print_arena(t_vm *vm);
 int					ncupdate(t_vm *vm, int input);
 void				print_panel(WINDOW *win, t_list *process, t_vm *vm);
 void				resize_window(t_vm *vm);
+void				champion_won(WINDOW *win, t_vm *vm, t_player *champion,
+									int color);
 void				fill_arena(int height, t_vm *vm, t_matrix m,
 								WINDOW *win);
 

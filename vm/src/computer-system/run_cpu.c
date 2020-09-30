@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/27 22:17:31 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/29 20:31:14 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/30 19:26:38 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,12 @@ int		run_processes(t_vm *vm, int control)
 		process_operations(vm, vm->processes);
 		kill_zombies(vm, vm->processes);
 	}
-	(vm->ncurses) ? endwin() : 0;
+	(vm->ncurses) ? nodelay(stdscr, 0) : 0;
+	(vm->ncurses) ? resize_window(vm) : 0;
+	(vm->ncurses && control != 1) ? player_won(vm, vm->player, 1) : 0;
+	(vm->ncurses && control == 1) ? endwin() : 0;
 	((vm->dump_param > 0 && vm->dump_param > vm->cycles) ||
 	(!vm->ncurses && vm->verbosity) || vm->verbosity) ? print_ram(vm) : 0;
-	(control != 1) ? player_won(vm->last_alive, vm->player) : 0;
+	(control != 1) ? player_won(vm, vm->player, 0) : 0;
 	return (EXIT_SUCCESS);
 }

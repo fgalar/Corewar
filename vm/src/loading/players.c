@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 17:09:58 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/29 20:31:23 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/30 20:05:48 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,33 @@ void		add_player(t_vm *vm, t_player *new)
 	vm->nplayers++;
 }
 
-int			player_won(int last_alive, t_player *champion)
+void		player_won(t_vm *vm, t_player *champion, int ncurses)
 {
+	int color;
+
+	color = 1;
 	while (champion)
 	{
-		if (last_alive == champion->nplayer)
-			ft_printf("Player %d (%s) won\n", last_alive, champion->name);
+		color++;
+		if (vm->last_alive == champion->nplayer)
+		{
+			if (ncurses)
+			{
+				champion_won(vm->p_win, vm, champion, color);
+				while (getch() != 'q')
+				{
+					resize_window(vm);
+					champion_won(vm->p_win, vm, champion, color);
+				}
+				endwin();
+				return ;
+			}
+			ft_printf("Player %d (%s) won\n", vm->last_alive, champion->name);
+			return ;
+		}
 		champion = champion->next;
 	}
-	return (last_alive);
+	(ncurses) ? endwin() : 0;
 }
 
 void		kill_players(t_vm *vm)
