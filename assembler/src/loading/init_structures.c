@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 20:49:08 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/27 17:39:55 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/30 21:05:18 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_code			*new_label(void)
 
 	if (!(new = (t_code*)malloc(sizeof(t_code))))
 		return (NULL);
+	new->mem_pos = 0;
 	new->label = NULL;
 	new->instr = NULL;
 	new->next = NULL;
@@ -46,6 +47,7 @@ t_instruction	*new_instruction(void)
 
 	if (!(new = (t_instruction*)malloc(sizeof(t_instruction))))
 		return (NULL);
+	new->mem_pos = 0;
 	new->opcode = 0;
 	new->nargs = 0;
 	new->size = 0;

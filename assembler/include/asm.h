@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 22:18:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/27 17:39:35 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/30 17:51:53 by fgarault         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef	struct		s_args
 	int				reg;
 	char			*dir;
 	char			*ind;
+	int				size;
 	t_uchar			hex[MAX_ARG_SIZE];
-	t_arg_type		size;
 	struct s_args	*next;
 }					t_args;
 
@@ -33,9 +33,10 @@ typedef struct		s_instr
 	int				line;
 	t_uchar			opcode;
 	t_uchar			nargs;
-	t_arg_type		size;
 	t_uchar			acb;
 	t_args			*args;
+	int				size;
+	int				mem_pos;
 	struct s_instr	*next;
 }					t_instruction;
 
@@ -43,6 +44,7 @@ typedef struct		s_code
 {
 	char			*label;
 	t_instruction	*instr;
+	int				mem_pos;
 	struct s_code	*next;
 }					t_code;
 
@@ -97,4 +99,10 @@ int					is_head(char **cmd, char *str, int line, unsigned int i);
 int					is_label(char **cmd);
 int					is_opcode(char **cmd, int i, int line);
 
+void				collecting_codebytes(t_file *file);
+void				get_addr(t_code *code_tab);
+int					writing_exec(t_file *file);
+
+void				itob(t_uchar *dest, unsigned int nb, int size);
+int					ft_power(int nb, int power);
 #endif
