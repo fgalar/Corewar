@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/07 19:46:06 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/08 15:25:08 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/22 02:01:51 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static int		every_char(char *str, int pos, char *c)
 
 	i = 0;
 	while (c[i])
-    {
+	{
 		if (str[pos] == c[i])
 			return (1);
 		i++;
-    }
+	}
 	return (0);
 }
 

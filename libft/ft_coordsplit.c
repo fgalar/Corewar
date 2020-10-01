@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/08 23:51:49 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/08 23:53:52 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/09/22 02:02:03 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_coords	ft_coordsplit(char **split, char *pos)
 {
-	int x;
-	int y;
-	t_coords c;
+	int			x;
+	int			y;
+	t_coords	c;
 
 	x = 0;
 	c.i = -1;

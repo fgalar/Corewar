@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_err.c                                        :+:      :+:    :+:   */
+/*   winner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/13 20:30:46 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/13 20:42:56 by ciglesia         ###   ########.fr       */
+/*   Created: 2020/09/30 19:31:11 by ciglesia          #+#    #+#             */
+/*   Updated: 2020/09/30 20:07:42 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "vm.h"
 
-int		lexicon_error(char **cmd, int i, char *err, int ret)
+void	champion_won(WINDOW *win, t_vm *vm, t_player *champion, int color)
 {
-	int	spaces;
-
-	spaces = ft_printf_fd(2, ERROR""RED": lexicon: %s"E0M, err);
-	ft_printf_fd(2, ": %s\n", cmd[ft_coordsplit(cmd, ft_itersplit(cmd, i)).i]);
-	spaces += ft_strlen(": ") + ft_coordsplit(cmd, ft_itersplit(cmd, i)).j;
-	ft_repet_fd(' ', spaces, 2);
-	ft_printf_fd(2, "^");
-	return (ret);
+	wattron(win, COLOR_PAIR(color));
+	mvwprintw(win, vm->p_height / 2 - 3, 2,"WINNER!");
+	mvwprintw(win, vm->p_height / 2 - 1, 5, "PLAYER: %d", vm->last_alive);
+	mvwprintw(win, vm->p_height / 2, 5, "%s", champion->name);
+	wattroff(win, COLOR_PAIR(color));
+	wrefresh(win);
 }
