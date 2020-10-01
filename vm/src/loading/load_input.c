@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 19:39:22 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/29 20:06:44 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/01 11:45:59 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		load_input(t_vm *vm, int ac, char **av)
 	int nb;
 
 	i = 1;
-	vm->ncurses = (ft_strcmp(av[i], "-n") == 0);
+	vm->ncurses = is_ncurses(i, ac, av);
 	i += vm->ncurses;
 	if ((i < ac) && ft_strcmp(av[i], "-dump") == 0)
 	{

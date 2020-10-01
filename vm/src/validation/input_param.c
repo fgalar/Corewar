@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 18:53:16 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/29 20:01:15 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/01 11:44:18 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	valid_format(int ac, char **av, int *np)
 	int		nplayers;
 
 	i = 1;
-	i += (ft_strcmp(av[i], "-n") == 0);
+	i += is_ncurses(i, ac, av);
 	if ((eparam = is_dump(i, ac, av)) < 0)
 		return (EXIT_FAILURE);
 	i += eparam;

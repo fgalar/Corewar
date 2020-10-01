@@ -6,7 +6,7 @@
 /*   By: ciglesia <ciglesia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/24 21:50:15 by ciglesia          #+#    #+#             */
-/*   Updated: 2020/09/30 19:59:37 by ciglesia         ###   ########.fr       */
+/*   Updated: 2020/10/01 11:45:08 by ciglesia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void				player_won(t_vm *vm, t_player *champion, int ncurses);
 
 int					valid_input(int ac, char **av);
 int					is_dump(int i, int ac, char **av);
+int					is_ncurses(int i, int ac, char **av);
 int					is_champion(int i, int ac, char **av, int *np);
 int					valid_header(int fd, char *file);
 
